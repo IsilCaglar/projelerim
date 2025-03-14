@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import streamlit as st
+
 pd.set_option('display.max_columns',None)
 # https://data.ibb.gov.tr/dataset/hourly-traffic-density-data-set
 
@@ -32,7 +33,7 @@ def filter_by_date(data, date_column = 'DATE_TIME'):
 
     mean = filtered.groupby('geohash').mean()
     st.dataframe(mean)
-    st.map(mean[['lat', 'lon']])
+    #st.map(mean[['lat', 'lon']])
 
     return filtered
 
@@ -65,12 +66,7 @@ def main() :
         st.subheader("Trafik yoğunluğu haritası")
         st.map(filtreli_data[['lat', 'lon']])
 
-        st.download_button(
-            label = "Zamana göre filtrelediğiniz veriyi indirebilirsiniz"
-            ,data = filtreli_data.to_csv(index = False)
-            ,file_name = "filtered_data.csv"
-            ,mime = "text/csv"
-        )
+    
 
 if __name__ == "__main__":
     main()
